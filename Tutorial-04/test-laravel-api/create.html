@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Laravel - API POST test example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<form id="productForm">
+  <input type="text" name="name" placeholder="Name" required />
+  <input type="number" name="price" placeholder="Price" required />
+  <button type="submit">Create product</button>
+</form>
+
+<div id="result">
+  
+</div>
+   
+<script type="text/javascript">
+  $('#productForm').on('submit', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: 'http://127.0.0.1:8000/api/products',
+      data: $(this).serialize(),
+      success: function(data){
+        $('#result').html('Product created: ' + JSON.stringify(data));
+      },
+      error: function(xhr){
+        $('#result').html('Error: ' + xhr.responseText);
+      }
+    });
+  });
+</script>
+   
+</body>
+</html>
